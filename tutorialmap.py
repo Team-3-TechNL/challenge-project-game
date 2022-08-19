@@ -15,7 +15,7 @@ pygame.display.set_caption("Medieval Game")
 
 #map images############################################################################
 
-one_block_img = pygame.image.load(r'https://github.com/Team-3-TechNL/challenge-project-game/blob/main/images/1block.png')
+one_block_img = pygame.image.load(r'xxxxx')
 one_block = pygame.transform.scale(one_block_img, (block_width, block_height))
 
 sign_img = pygame.image.load(r"C:\Users\arthu\Downloads\img\sign1.png")

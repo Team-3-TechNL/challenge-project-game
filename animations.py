@@ -3,7 +3,7 @@ pygame.init()
 screen = pygame.display.set_mode((1200, 700))
 
 # load sprite sheets
-crowned_king_walking = pygame.image.load('images/king_walk_test.png').convert()
+crowned_king_walking = pygame.image.load('images/Sprite Sheets/king_walk_test.png').convert()
 black = (0, 0, 0)
 
 # appends all frames from sprite sheet into list

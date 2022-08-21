@@ -10,6 +10,12 @@ player = animations.crowned_walking_frames[0].get_rect()
 # Initial position
 player.bottomleft = (0, screen_height-1)
 
+
+# Movement Settings
+left = False
+right = False
+
+
 # Jump Settings
 jumping = False
 gravity = 1
@@ -29,7 +35,7 @@ def collisions():
 
 
 def animate():
-    global player
+    global player, playerX_speed
     keys = pygame.key.get_pressed()
 
     animations.frame_time += 1 # increases every 1/60 of a second
@@ -42,6 +48,9 @@ def animate():
             animations.active_king += 1
         if keys[pygame.K_LEFT]:
             animations.active_king -= 1
+        if keys[pygame.K_LEFT] and keys[pygame.K_RIGHT]:
+            playerX_speed = 0
+
         # changes between right/left
         if animations.active_king >= 8:
             animations.active_king = 0

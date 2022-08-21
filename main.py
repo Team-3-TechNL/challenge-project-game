@@ -1,6 +1,7 @@
 import pygame, sys
-import player
+import player, levels.tutorial_level
 
+# bg = pygame.image.load("images/Backgrounds/length_5_bg.png")
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -17,7 +18,7 @@ floor = pygame.Rect(1, screen_height, screen_width, 1)
 
 def draw_rects():
     pygame.draw.rect(screen, "black", floor)
-
+    # screen.blit(bg, (0,0))
 
 while True:
     for event in pygame.event.get():
@@ -27,23 +28,32 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 player.playerX_speed = 7
+                player.right = True
+
             if event.key == pygame.K_LEFT:
                 player.playerX_speed = -7
+                player.left = True
+
             if event.key == pygame.K_UP:
                 player.jumping = True
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_RIGHT:
                 player.playerX_speed = 0
+                player.right = False
+
             if event.key == pygame.K_LEFT:
                 player.playerX_speed = 0
+                player.left = False
 
     screen.fill("grey")
 
+    levels.tutorial_level.load_level()
     draw_rects()
     player.collisions()
     player.jump()
     player.animate()
+
 
     clock.tick(60)
     pygame.display.flip()

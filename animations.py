@@ -30,6 +30,6 @@ def sprite_init(sheet, rows, columns, scale=1):
     return frames
 
 
-crowned_walking_frames = sprite_init(crowned_king_walking, 1, 8, 3)
+crowned_walking_frames = sprite_init(crowned_king_walking, 1, 8, 2)
 active_king = 0
 frame_time = 0

@@ -3,7 +3,7 @@ pygame.init()
 screen = pygame.display.set_mode((1200, 700))
 
 # load sprite sheets
-crowned_king_walking = pygame.image.load('images/Sprite Sheets/king_walk_test.png').convert()
+crowned_king_walking = pygame.image.load('images/Sprite Sheets/crowned_king_walking.png').convert()
 black = (0, 0, 0)
 
 # appends all frames from sprite sheet into list
@@ -30,6 +30,7 @@ def sprite_init(sheet, rows, columns, scale=1):
     return frames
 
 
-crowned_walking_frames = sprite_init(crowned_king_walking, 1, 8, 2)
+crowned_walking_frames = sprite_init(crowned_king_walking, 1, 8, 3)
 active_king = 0
 frame_time = 0
+ 

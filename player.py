@@ -8,7 +8,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 
 player = animations.crowned_walking_frames[0].get_rect()
 # Initial position
-player.bottomleft = (0, screen_height-1)
+player.bottomleft = (0, 654)
 
 
 # Movement Settings
@@ -19,7 +19,7 @@ right = False
 # Jump Settings
 jumping = False
 gravity = 1
-jump_height = 30  # CHANGE THIS VARIABLE TO CHANGE JUMP HEIGHT
+jump_height = 20  # CHANGE THIS VARIABLE TO CHANGE JUMP HEIGHT
 playerY_speed = jump_height
 playerX_speed = 0
 

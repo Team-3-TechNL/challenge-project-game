@@ -6,8 +6,8 @@ screen_width = 1200
 screen_height = 700
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-block_height = 65
-block_width = 65
+block_height = 70
+block_width = 70
 
 # Tiles
 one_block_img = pygame.image.load('images/Tiles/1block.png')

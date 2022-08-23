@@ -37,6 +37,10 @@ while True:
             if event.key == pygame.K_UP:
                 player.jumping = True
 
+            if event.key == pygame.K_z:
+                if player.holding_sword:
+                    player.swinging_sword = True
+
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_RIGHT:
                 player.playerX_speed = 0
@@ -53,7 +57,7 @@ while True:
     player.collisions()
     player.jump()
     player.animate()
-
+    player.sword_attack()
 
     clock.tick(60)
     pygame.display.flip()

@@ -4,6 +4,10 @@ screen = pygame.display.set_mode((1200, 700))
 
 # load sprite sheets
 crowned_king_walking = pygame.image.load('images/Sprite Sheets/crowned_king_walking.png').convert()
+king_walking = pygame.image.load('images/Sprite Sheets/king_walking.png').convert()
+king_walking_sword = pygame.image.load('images/Sprite Sheets/king_walking_sword.png').convert()
+king_swinging_sword = pygame.image.load('images/Sprite Sheets/king_sword_swing.png').convert()
+
 black = (0, 0, 0)
 
 # appends all frames from sprite sheet into list
@@ -31,6 +35,10 @@ def sprite_init(sheet, rows, columns, scale=1):
 
 
 crowned_walking_frames = sprite_init(crowned_king_walking, 1, 8, 3)
+king_walking_frames = sprite_init(king_walking, 1, 8, 3)
+king_walking_sword_frames = sprite_init(king_walking_sword, 1, 8, 3)
+king_swinging_sword_frames = sprite_init(king_swinging_sword, 1, 7, 3)
+
 active_king = 0
+action_frame = 0
 frame_time = 0
- 

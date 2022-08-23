@@ -7,6 +7,7 @@ screen_height = 700
 screen = pygame.display.set_mode((screen_width, screen_height))
 
 player = animations.crowned_walking_frames[0].get_rect()
+
 # Initial position
 player.bottomleft = (0, 654)
 
@@ -14,7 +15,7 @@ player.bottomleft = (0, 654)
 # Movement Settings
 left = False
 right = False
-
+run_once = False
 
 # Jump Settings
 jumping = False
@@ -22,6 +23,10 @@ gravity = 1
 jump_height = 20  # CHANGE THIS VARIABLE TO CHANGE JUMP HEIGHT
 playerY_speed = jump_height
 playerX_speed = 0
+
+# Animation Settings
+holding_sword = False
+swinging_sword = False
 
 
 def collisions():
@@ -35,14 +40,15 @@ def collisions():
 
 
 def animate():
-    global player, playerX_speed
+    global player, playerX_speed, holding_sword, swinging_sword, left, right
+
     keys = pygame.key.get_pressed()
 
     animations.frame_time += 1 # increases every 1/60 of a second
     if animations.frame_time > 60:
         animations.frame_time = 0 # resets every second
 
-    if animations.frame_time % 3 == 0:  # player moving at 20 FPS (60 / 3 = 20)
+    if animations.frame_time % 4 == 0:  # player moving at 15 FPS (60 / 4 = 15)
         # detects key presses
         if keys[pygame.K_RIGHT]:
             animations.active_king += 1
@@ -51,14 +57,51 @@ def animate():
         if keys[pygame.K_LEFT] and keys[pygame.K_RIGHT]:
             playerX_speed = 0
 
+        if keys[pygame.K_SPACE]:
+            holding_sword = True
+        if keys[pygame.K_f]:
+            holding_sword = False
+
+
         # changes between right/left
         if animations.active_king >= 8:
             animations.active_king = 0
+        if 0 <= animations.active_king < 8:
+            right = True
+            left = False
         if animations.active_king <= -8:
             animations.active_king = -1
+        if -8 < animations.active_king <= -1:
+            left = True
+            right = False
+
+        if swinging_sword:
+            if right:
+                if animations.action_frame >= 6:
+                    animations.action_frame = 0
+                    swinging_sword = False
+            if left:
+                global run_once
+                if not run_once:
+                    animations.action_frame = 7
+                    run_once = True
+                if animations.action_frame >= 13:
+                    animations.action_frame = 7
+                    swinging_sword = False
+
+            animations.action_frame += 1
+
 
     # places frames onto player object
-    screen.blit(animations.crowned_walking_frames[animations.active_king], player)
+    if swinging_sword and right:
+        screen.blit(animations.king_swinging_sword_frames[animations.action_frame], player)
+    elif swinging_sword and left:
+        screen.blit(animations.king_swinging_sword_frames[animations.action_frame], (player.x - 77, player.y))
+
+    elif holding_sword:
+        screen.blit(animations.king_walking_sword_frames[animations.active_king], player)
+    else:
+        screen.blit(animations.king_walking_frames[animations.active_king], player)
 
 
 def jump():
@@ -70,3 +113,8 @@ def jump():
         if playerY_speed < -jump_height:
             jumping = False
             playerY_speed = jump_height
+
+
+def sword_attack():
+    global swinging_sword
+

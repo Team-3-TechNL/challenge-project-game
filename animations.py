@@ -8,6 +8,18 @@ king_walking = pygame.image.load('images/Sprite Sheets/king_walking.png').conver
 king_walking_sword = pygame.image.load('images/Sprite Sheets/king_walking_sword.png').convert()
 king_swinging_sword = pygame.image.load('images/Sprite Sheets/king_sword_swing.png').convert()
 
+hp3 = pygame.image.load('images/Sprite Sheets/3_hp.png')
+hp3 = pygame.transform.scale(hp3, (150, 45))
+
+hp2 = pygame.image.load('images/Sprite Sheets/2_hp.png')
+hp2 = pygame.transform.scale(hp2, (150, 45))
+
+hp1 = pygame.image.load('images/Sprite Sheets/1_hp.png')
+hp1 = pygame.transform.scale(hp1, (150, 45))
+
+hp0 = pygame.image.load('images/Sprite Sheets/0_hp.png')
+hp0 = pygame.transform.scale(hp0, (150, 45))
+
 black = (0, 0, 0)
 
 # appends all frames from sprite sheet into list

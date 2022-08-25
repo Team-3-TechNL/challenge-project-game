@@ -1,5 +1,8 @@
 import pygame
 import animations
+import enemies
+import level_load
+
 pygame.init()
 
 screen_width = 1200
@@ -11,6 +14,7 @@ player = animations.crowned_walking_frames[0].get_rect()
 # Player Settings
 health = 3
 invincibility_time = 0
+hurtbox = pygame.Rect(0,0,70,156)
 
 # Initial position
 player.bottomleft = (0, 654)
@@ -24,7 +28,7 @@ run_once = False
 # Jump Settings
 jumping = False
 gravity = 1
-jump_height = 20  # CHANGE THIS VARIABLE TO CHANGE JUMP HEIGHT
+jump_height = 22  # CHANGE THIS VARIABLE TO CHANGE JUMP HEIGHT
 playerY_speed = jump_height
 playerX_speed = 0
 
@@ -46,12 +50,23 @@ def collisions():
 def animate():
     global player, playerX_speed, holding_sword, swinging_sword, left, right
 
-    pygame.draw.rect(screen, "red", player)
+    # pygame.draw.rect(screen, "red", player)
     keys = pygame.key.get_pressed()
 
     animations.frame_time += 1 # increases every 1/60 of a second
     if animations.frame_time > 60:
         animations.frame_time = 0 # resets every second
+
+    if animations.frame_time == 60:
+        animations.idle_frame += 1
+        animations.second_count += 1
+
+        if animations.second_count >= 2:
+            animations.second_count = 0
+            enemies.sword_swing = True
+
+        if animations.idle_frame > 1:
+            animations.idle_frame = 0
 
     if animations.frame_time % 4 == 0:  # player moving at 15 FPS (60 / 4 = 15)
         # detects key presses
@@ -112,6 +127,7 @@ def animate():
     # HP indicator
     if health == 3:
         screen.blit(animations.hp3, (0, 0))
+
     elif health == 2:
         screen.blit(animations.hp2, (0, 0))
     elif health == 1:
@@ -131,6 +147,14 @@ def jump():
             playerY_speed = jump_height
 
 
+
 def sword_attack():
-    global swinging_sword
+    global swinging_sword, hurtbox
+    if swinging_sword and right:
+        hurtbox.bottomleft = player.bottomright
+    elif swinging_sword and left:
+        hurtbox.bottomright = player.bottomleft
+    else:
+        hurtbox.y = 800
+
 

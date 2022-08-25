@@ -8,6 +8,8 @@ king_walking = pygame.image.load('images/Sprite Sheets/king_walking.png').conver
 king_walking_sword = pygame.image.load('images/Sprite Sheets/king_walking_sword.png').convert()
 king_swinging_sword = pygame.image.load('images/Sprite Sheets/king_sword_swing.png').convert()
 
+knight_swinging_sword = pygame.image.load('images/Sprite Sheets/knight_sword_swing.png').convert()
+
 hp3 = pygame.image.load('images/Sprite Sheets/3_hp.png')
 hp3 = pygame.transform.scale(hp3, (150, 45))
 
@@ -21,6 +23,7 @@ hp0 = pygame.image.load('images/Sprite Sheets/0_hp.png')
 hp0 = pygame.transform.scale(hp0, (150, 45))
 
 black = (0, 0, 0)
+
 
 # appends all frames from sprite sheet into list
 def sprite_init(sheet, rows, columns, scale=1):
@@ -51,6 +54,13 @@ king_walking_frames = sprite_init(king_walking, 1, 8, 3)
 king_walking_sword_frames = sprite_init(king_walking_sword, 1, 8, 3)
 king_swinging_sword_frames = sprite_init(king_swinging_sword, 1, 7, 3)
 
+knight_swinging_sword_frames = sprite_init(knight_swinging_sword, 1, 7, 3)
+
 active_king = 0
 action_frame = 0
 frame_time = 0
+
+idle_frame = 0
+
+second_count = 0
+enemy_action_frame = 0

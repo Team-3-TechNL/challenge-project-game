@@ -1,5 +1,5 @@
 import pygame
-import player, level_load
+import player, level_load, enemies, animations
 pygame.init()
 
 screen_width = 1200
@@ -8,8 +8,8 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 
 offset = 0
 
-
-
+# Define enemy rects
+knight_1 = level_load.knight_idle_L1.get_rect()
 
 # Define spike rects
 spike1 = level_load.spike.get_rect()
@@ -77,11 +77,20 @@ dark_plat2 = dark_plat1.copy()
 
 light_plat_5 = level_load.ground_platform_LIGHT.get_rect()
 
+platforms = [light_plat1, light_plat2, light_plat3, light_plat4, light_plat_5, dark_plat1, dark_plat2, block1, block2, block3, block4, block5, block6, block7, block8]
+
+# Define goal rect
+key = level_load.key.get_rect()
+
 
 def load_level():
     global offset
 
+
     screen.blit(level_load.tutorial_bg, (offset, 0))
+
+
+
 
     #SPIKES
     screen.blit(level_load.spike, spike1)
@@ -235,7 +244,6 @@ def load_level():
         offset = 0
 
     # Player Collisions
-
     # SPIKES
     if player.player.collidelist(spikes) != -1:
         if player.invincibility_time <= 0:
@@ -244,6 +252,68 @@ def load_level():
     if player.invincibility_time != 0:
         player.invincibility_time -= 1
 
+    # PLATFORMS
+    if player.player.bottom > light_plat1.top and light_plat1.left < player.player.right < light_plat1.right:
+        player.player.bottom = light_plat1.top
+
+    if player.player.bottom > light_plat2.top and light_plat2.left < player.player.right < light_plat2.right:
+        player.player.bottom = light_plat2.top
+
+    if player.player.bottom > light_plat3.top and light_plat3.left < player.player.right < light_plat3.right:
+        player.player.bottom = light_plat3.top
+
+    if player.player.bottom > light_plat4.top and light_plat4.left < player.player.right < light_plat4.right:
+        player.player.bottom = light_plat4.top
+
+    if player.player.colliderect(light_plat_5):
+        player.player.bottom = light_plat_5.top
+
+    if player.player.bottom > dark_plat1.top and dark_plat1.left < player.player.right < dark_plat1.right:
+        player.player.bottom = dark_plat1.top
+
+    if player.player.bottom > dark_plat2.top and dark_plat2.left < player.player.right < dark_plat2.right:
+        player.player.bottom = dark_plat2.top
+
+    if player.player.colliderect(block1):
+        player.player.bottom = block1.top
+
+    if player.player.colliderect(block2):
+        player.player.bottom = block2.top
+
+    if player.player.colliderect(block3):
+        player.player.bottom = block3.top
+
+    if player.player.colliderect(block4):
+        player.player.bottom = block4.top
+
+    if player.player.colliderect(block5):
+        player.player.bottom = block5.top
+
+    if player.player.colliderect(block6):
+        player.player.bottom = block6.top
+
+    if player.player.colliderect(block7):
+        player.player.bottom = block7.top
+
+    if player.player.colliderect(block8):
+        player.player.bottom = block8.top
+
+    if player.player.collidelist(platforms) == -1 and not player.jumping or player.player.bottom < 654 and not player.jumping:
+        player.player.y += 10
+
+    # GOAL
+    screen.blit(level_load.key, key)
+    key.topleft = (5900 + offset, 290)
+
+    if player.player.colliderect(key):
+        level_load.level += 1
+
+
+    # ENEMIES
+    enemies.enemy_setup()
+
+
+    # Player Health
     if player.health <= 0:
         offset = 0
         player.player.bottomleft = (0, 654)
@@ -252,3 +322,4 @@ def load_level():
     # FLOOR
     if player.player.bottom > 654:
         player.player.bottom = 654
+

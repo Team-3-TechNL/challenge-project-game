@@ -1,4 +1,7 @@
 import pygame, sys
+
+import enemies
+import level_load
 import player, levels.tutorial_level
 
 # bg = pygame.image.load("images/Backgrounds/length_5_bg.png")
@@ -52,8 +55,11 @@ while True:
 
     screen.fill("grey")
 
-    levels.tutorial_level.load_level()
+    if level_load.level == 1:
+        levels.tutorial_level.load_level()
+
     draw_rects()
+
     player.collisions()
     player.jump()
     player.animate()

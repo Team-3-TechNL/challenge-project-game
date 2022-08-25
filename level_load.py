@@ -5,6 +5,8 @@ screen_width = 1200
 screen_height = 700
 screen = pygame.display.set_mode((screen_width, screen_height))
 
+level = 1
+
 block_height = 70
 block_width = 70
 
@@ -38,3 +40,9 @@ spike = pygame.transform.scale(spike_img, (block_width, block_height))
 # Tutorial Level
 tutorial_bg = pygame.image.load("images/Backgrounds/length_5_bg.png")
 
+# Enemy Sprites
+knight_idle_L1 = pygame.image.load("images/Sprite Sheets/knight_idle_L1.png")
+knight_idle_L1 = pygame.transform.scale(knight_idle_L1, (108, 156))
+
+knight_idle_L2 = pygame.image.load("images/Sprite Sheets/knight_idle_L2.png")
+knight_idle_L2 = pygame.transform.scale(knight_idle_L2, (108, 156))

@@ -10,6 +10,7 @@ level = 1
 block_height = 70
 block_width = 70
 
+## LEVEL 1 ##
 # Tiles
 one_block_img = pygame.image.load('images/Tiles/1block.png')
 one_block = pygame.transform.scale(one_block_img, (block_width, block_height))
@@ -46,3 +47,20 @@ knight_idle_L1 = pygame.transform.scale(knight_idle_L1, (108, 156))
 
 knight_idle_L2 = pygame.image.load("images/Sprite Sheets/knight_idle_L2.png")
 knight_idle_L2 = pygame.transform.scale(knight_idle_L2, (108, 156))
+
+
+## LEVEL 2 ##
+castle_background = pygame.image.load('images/Backgrounds/level2_bg.png')
+
+boss_background = pygame.image.load('images/Backgrounds/bossfight_bg.png')
+
+platform_img = pygame.image.load('images/Tiles/platform_lv2.png')
+platform_block = pygame.transform.scale(platform_img, (block_width*6,block_height))
+
+block_img = pygame.image.load('images/Tiles/block_lv2.png')
+block = pygame.transform.scale(block_img, (block_width*1.8,block_height))
+
+spike_img = pygame.image.load('images/Tiles/spike_lv2.png')
+spike2 = pygame.transform.scale(spike_img, (block_width,block_height/1.15))
+
+thanks = pygame.image.load('images/Sprite Sheets/thanks_for_playing.png')

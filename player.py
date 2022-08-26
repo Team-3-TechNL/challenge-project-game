@@ -2,6 +2,7 @@ import pygame
 import animations
 import enemies
 import level_load
+import SFX
 
 pygame.init()
 
@@ -78,6 +79,8 @@ def animate():
             playerX_speed = 0
 
         if keys[pygame.K_SPACE]:
+            if not holding_sword:
+                pygame.mixer.Sound.play(SFX.draw_sword)
             holding_sword = True
         if keys[pygame.K_f]:
             holding_sword = False
@@ -114,7 +117,10 @@ def animate():
 
 
     # places frames onto player object
-    if swinging_sword and right:
+
+    if enemies.boss_dead:
+        screen.blit(animations.crowned_walking_frames[animations.active_king], player)
+    elif swinging_sword and right:
         screen.blit(animations.king_swinging_sword_frames[animations.action_frame], player)
     elif swinging_sword and left:
         screen.blit(animations.king_swinging_sword_frames[animations.action_frame], (player.x - 87, player.y))
@@ -156,5 +162,4 @@ def sword_attack():
         hurtbox.bottomright = player.bottomleft
     else:
         hurtbox.y = 800
-
 

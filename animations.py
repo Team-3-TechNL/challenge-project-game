@@ -10,6 +10,11 @@ king_swinging_sword = pygame.image.load('images/Sprite Sheets/king_sword_swing.p
 
 knight_swinging_sword = pygame.image.load('images/Sprite Sheets/knight_sword_swing.png').convert()
 
+boss_L = pygame.image.load('images/Sprite Sheets/enemy_king_left.png').convert()
+boss_R = pygame.image.load('images/Sprite Sheets/enemy_king_right.png').convert()
+boss_walking = pygame.image.load('images/Sprite Sheets/enemy_walking_sword.png').convert()
+
+
 hp3 = pygame.image.load('images/Sprite Sheets/3_hp.png')
 hp3 = pygame.transform.scale(hp3, (150, 45))
 
@@ -55,6 +60,10 @@ king_walking_sword_frames = sprite_init(king_walking_sword, 1, 8, 3)
 king_swinging_sword_frames = sprite_init(king_swinging_sword, 1, 7, 3)
 
 knight_swinging_sword_frames = sprite_init(knight_swinging_sword, 1, 7, 3)
+
+boss_walking_frames = sprite_init(boss_walking, 1, 8, 3)
+boss_swinging_sword_frames_L = sprite_init(boss_L, 1, 7, 3)
+boss_swinging_sword_frames_R = sprite_init(boss_R, 1, 7, 3)
 
 active_king = 0
 action_frame = 0

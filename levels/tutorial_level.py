@@ -1,5 +1,5 @@
 import pygame
-import player, level_load, enemies, animations
+import player, level_load, enemies, animations, SFX
 pygame.init()
 
 screen_width = 1200
@@ -86,8 +86,8 @@ key = level_load.key.get_rect()
 def load_level():
     global offset
 
-
-    screen.blit(level_load.tutorial_bg, (offset, 0))
+    if level_load.level == 1:
+        screen.blit(level_load.tutorial_bg, (offset, 0))
 
 
 
@@ -248,30 +248,31 @@ def load_level():
     if player.player.collidelist(spikes) != -1:
         if player.invincibility_time <= 0:
             player.health -=1
+            pygame.mixer.Sound.play(SFX.hurt)
             player.invincibility_time = 120
     if player.invincibility_time != 0:
         player.invincibility_time -= 1
 
     # PLATFORMS
-    if player.player.bottom > light_plat1.top and light_plat1.left < player.player.right < light_plat1.right:
+    if player.player.bottom > light_plat1.top and light_plat1.left < player.player.right and player.player.left < light_plat1.right:
         player.player.bottom = light_plat1.top
 
-    if player.player.bottom > light_plat2.top and light_plat2.left < player.player.right < light_plat2.right:
+    if player.player.bottom > light_plat2.top and light_plat2.left < player.player.right and player.player.left < light_plat2.right:
         player.player.bottom = light_plat2.top
 
-    if player.player.bottom > light_plat3.top and light_plat3.left < player.player.right < light_plat3.right:
+    if player.player.bottom > light_plat3.top and light_plat3.left < player.player.right and player.player.left < light_plat3.right:
         player.player.bottom = light_plat3.top
 
-    if player.player.bottom > light_plat4.top and light_plat4.left < player.player.right < light_plat4.right:
+    if player.player.bottom > light_plat4.top and light_plat4.left < player.player.right and player.player.left < light_plat4.right:
         player.player.bottom = light_plat4.top
 
     if player.player.colliderect(light_plat_5):
         player.player.bottom = light_plat_5.top
 
-    if player.player.bottom > dark_plat1.top and dark_plat1.left < player.player.right < dark_plat1.right:
+    if player.player.bottom > dark_plat1.top and dark_plat1.left < player.player.right and player.player.left < dark_plat1.right:
         player.player.bottom = dark_plat1.top
 
-    if player.player.bottom > dark_plat2.top and dark_plat2.left < player.player.right < dark_plat2.right:
+    if player.player.bottom > dark_plat2.top and dark_plat2.left < player.player.right and player.player.left < dark_plat2.right:
         player.player.bottom = dark_plat2.top
 
     if player.player.colliderect(block1):
@@ -306,6 +307,10 @@ def load_level():
     key.topleft = (5900 + offset, 290)
 
     if player.player.colliderect(key):
+        if level_load.level == 1:
+            player.player.bottomleft = (0, 664)
+            player.health = 3
+            pygame.mixer.Sound.play(SFX.open)
         level_load.level += 1
 
 
@@ -319,7 +324,8 @@ def load_level():
         player.player.bottomleft = (0, 654)
         player.health = 3
 
-    # FLOOR
-    if player.player.bottom > 654:
-        player.player.bottom = 654
 
+    # FLOOR
+    if level_load.level == 1:
+        if player.player.bottom > 654:
+            player.player.bottom = 654
